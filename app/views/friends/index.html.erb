@@ -1,0 +1,57 @@
+<!--<p style="color: green"><%= notice %></p>-->
+
+<% if user_signed_in? %>
+
+  <h1>Friends List</h1>
+
+  <table class="table table-striped table-bordered table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Twitter</th>
+      <!--<th scope="col">User Id</th>-->
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <div id="friends">
+      <% i = 0 %>
+      <% @friends.each do |friend| %>
+        <!--
+        %= render friend %>
+        <p>
+          %= link_to "Show this friend", friend %>
+        </p>
+        -->
+        <% if friend.user == current_user %><!--Validacion del usuario actual-->
+        <tr>
+          <th scope="row"><%= i += 1 %></th>
+          <td><%= link_to friend.fisrt_name + ' ' + friend.last_name, friend %></td>
+          <td><%= friend.email %></td>
+          <td><%= friend.phone %></td>
+          <td><%= friend.twitter %></td>
+          <!--<td><%= friend.user_id %></td>-->
+          <td ><%= link_to "Show", friend, class:"btn btn-outline-info btn-sm" %></td>
+          <td ><%= link_to "Edit", edit_friend_path(friend), class:"btn btn-outline-warning btn-sm" %></td>
+          <td ><%= button_to "Delete", friend, method: :delete, data: {turbo_method: :delete, turbo_confirm: "Mensaje: Estas seguro?"}, class:"btn btn-outline-danger btn-sm" %></td>
+          
+        </tr>
+        <% end %>
+      <% end %>
+    </div>
+
+  </tbody>
+  </table>
+
+  <%== pagy_bootstrap_nav(@pagy) %>
+
+<%= link_to "New friend", new_friend_path, class:"btn btn-secondary" %>
+
+<% else %>
+   <h1>Home</h1>
+   <p>Welcome Home Friends Page.</p>
+<% end %>
