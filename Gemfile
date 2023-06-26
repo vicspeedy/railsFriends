@@ -6,7 +6,7 @@ ruby "3.2.0"
 # Paginacion
 gem 'pagy', '~> 6.0', '>= 6.0.4'
 
-# sweet-alert No funcional revisar
+# sweet-alert No funcional revisar...
 gem 'sweet-alert-confirm', '~> 0.5.0'
 
 # Instalr la Gema 'devise' para la autenticación en la application aplicar con: 
